@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+      id="com.hongyun.cordova.plugin.wx.wxpay"
+      version="0.0.1">
+    <name>CDVRShare</name>
+    <description>Cordova wxpay Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,wxpay</keywords>
+
+
+    <js-module src="www/Wxpay.js" name="Wxpay">
+        <clobbers target="navigator.hongyun.Wxpay" />
+    </js-module>
+
+	<platform name="android">
+
+        <config-file target="config.xml" parent="/*">
+			<feature name="Wxpay">
+				<param name="android-package" value="com.hongyun.cordova.plugin.wx.wxpay.Wxpay"/>
+				<param name="onload" value="true" />
+			</feature>
+        </config-file>
+
+		<source-file
+				src="src/android/com/hongyun/cordova/plugin/wx/wxpay/Wxpay.java"
+				target-dir="src/com/hongyun/cordova/plugin/wx/wxpay" />
+        <source-file
+				src="src/android/com/hongyun/cordova/plugin/wx/wxpay/Util.java"
+				target-dir="src/com/hongyun/cordova/plugin/wx/wxpay" />
+	</platform>
+
+	<platform name="ios">
+        
+        <config-file target="config.xml" parent="/*">
+            <feature name="Wxpay">
+                <param name="ios-package" value="Wxpay"/>
+            </feature>
+        </config-file>
+        
+		<header-file src="src/ios/Wxpay.h" />
+        <source-file src="src/ios/Wxpay.m" />
+		<header-file src="src/ios/XMLReader.h" />
+        <source-file src="src/ios/XMLReader.m" />
+
+		<!--微信文件-->
+        <source-file src="src/ios/weixin/libWeChatSDK.a" framework="true" target-dir="weixin"/>
+        <header-file src="src/ios/weixin/WXApi.h" target-dir="weixin"/>
+        <header-file src="src/ios/weixin/WXApiObject.h" target-dir="weixin"/>
+
+        <!-- AFNetworking -->
+        <header-file src="src/ios/AFNetworking/AFHTTPSessionManager.h" target-dir="AFNetworking"/>
+        <source-file src="src/ios/AFNetworking/AFHTTPSessionManager.m" target-dir="AFNetworking"/>
+        <header-file src="src/ios/AFNetworking/AFNetworkReachabilityManager.h" target-dir="AFNetworking"/>
+        <source-file src="src/ios/AFNetworking/AFNetworkReachabilityManager.m" target-dir="AFNetworking"/>
+        <header-file src="src/ios/AFNetworking/AFSecurityPolicy.h" target-dir="AFNetworking"/>
+        <source-file src="src/ios/AFNetworking/AFSecurityPolicy.m" target-dir="AFNetworking"/>
+        <header-file src="src/ios/AFNetworking/AFURLRequestSerialization.h" target-dir="AFNetworking"/>
+        <source-file src="src/ios/AFNetworking/AFURLRequestSerialization.m" target-dir="AFNetworking"/>
+        <header-file src="src/ios/AFNetworking/AFURLResponseSerialization.h" target-dir="AFNetworking"/>
+        <source-file src="src/ios/AFNetworking/AFURLResponseSerialization.m" target-dir="AFNetworking"/>
+        <header-file src="src/ios/AFNetworking/AFURLSessionManager.h" target-dir="AFNetworking"/>
+        <source-file src="src/ios/AFNetworking/AFURLSessionManager.m" target-dir="AFNetworking"/>
+        <header-file src="src/ios/AFNetworking/AFNetworking.h" target-dir="AFNetworking"/>
+
+        <framework src="libsqlite3.0.tbd"/>
+        <framework src="CFNetwork.framework"/>
+        <framework src="libz.1.2.5.tbd" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="Security.framework" />
+        <framework src="libstdc++.6.0.9.tbd" />
+
+		<!--CFBundleURLTypes 当前APP的scheme记录， 通过schema可在其它App中打开当前App-->
+		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
+		    <array>
+				<dict>
+					<key>CFBundleTypeRole</key>
+					<string>Editor</string>
+					<key>CFBundleURLIconFile</key>
+					<string></string>
+					<key>CFBundleURLName</key>
+					<string>wx</string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string></string>
+					</array>
+				</dict>
+			</array>
+		</config-file>
+
+		<!--LSApplicationQueriesSchemes是从iOS9时被引入的。
+		用意：当前APP允许访问的APP有哪些，即白名单，需要通信双方 均设置为对方的scheme，
+		否则当调用对方App时，系统会告诉你This app is not allowed to query for scheme。-->
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+            <array>
+                <string>safepay</string>
+                <string>alipay</string>
+                <string>weixin</string>
+            </array>
+        </config-file>
+    </platform>
+
+</plugin>
