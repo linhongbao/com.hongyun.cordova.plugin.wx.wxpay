@@ -1,0 +1,28 @@
+{
+  "name": "com.hongyun.cordova.plugin.wx.wxpay",
+  "version": "1.0.0",
+  "description": "",
+  "cordova": {
+    "id": "com.hongyun.cordova.plugin.wx.wxpay",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linhongbao/com.hongyun.cordova.plugin.wx.wxpay.git"
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linhongbao/com.hongyun.cordova.plugin.wx.wxpay/issues"
+  },
+  "homepage": "https://github.com/linhongbao/com.hongyun.cordova.plugin.wx.wxpay#readme"
+}
